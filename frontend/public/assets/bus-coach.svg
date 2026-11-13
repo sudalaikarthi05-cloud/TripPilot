@@ -1,0 +1,403 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 280" width="880" height="280" fill="none">
+  <defs>
+    <!-- Pearl White Metallic Gradient for Upper Coach Body -->
+    <linearGradient id="pearlWhiteGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#FFFFFF" />
+      <stop offset="20%" stopColor="#F8FAFC" />
+      <stop offset="65%" stopColor="#E2E8F0" />
+      <stop offset="100%" stopColor="#CBD5E1" />
+    </linearGradient>
+
+    <!-- Deep Royal Maroon / Burgundy Lower Body Gradient -->
+    <linearGradient id="maroonLiveryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#961727" />
+      <stop offset="35%" stopColor="#801220" />
+      <stop offset="70%" stopColor="#660C17" />
+      <stop offset="100%" stopColor="#4A060F" />
+    </linearGradient>
+
+    <!-- Vibrant Crimson Dynamic Swoosh Gradient -->
+    <linearGradient id="crimsonSwooshGrad" x1="0%" y1="0%" x2="100%" y2="20%">
+      <stop offset="0%" stopColor="#E11D48" />
+      <stop offset="45%" stopColor="#BE123C" />
+      <stop offset="85%" stopColor="#9F1239" />
+      <stop offset="100%" stopColor="#881337" />
+    </linearGradient>
+
+    <!-- Golden Accent Ribbon Gradient -->
+    <linearGradient id="goldRibbonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#FDE68A" />
+      <stop offset="40%" stopColor="#F59E0B" />
+      <stop offset="80%" stopColor="#D97706" />
+      <stop offset="100%" stopColor="#FDE68A" />
+    </linearGradient>
+
+    <!-- Polished Chrome Trim Gradient -->
+    <linearGradient id="chromeTrimGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#94A3B8" />
+      <stop offset="30%" stopColor="#F8FAFC" />
+      <stop offset="70%" stopColor="#E2E8F0" />
+      <stop offset="100%" stopColor="#64748B" />
+    </linearGradient>
+
+    <!-- Panoramic Smoked Tinted Glass with Warm Amber Cabin Glow -->
+    <linearGradient id="panoramicGlassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#0B132B" />
+      <stop offset="40%" stopColor="#111B33" />
+      <stop offset="72%" stopColor="#2D1C12" />
+      <stop offset="100%" stopColor="#4A2E16" />
+    </linearGradient>
+
+    <!-- Individual Window Warm Lighting Gradient -->
+    <linearGradient id="windowWarmGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#0F172A" />
+      <stop offset="45%" stopColor="#1E293B" />
+      <stop offset="75%" stopColor="#452B14" />
+      <stop offset="100%" stopColor="#784617" />
+    </linearGradient>
+
+    <!-- Headlight Beam Volumetric Gradient -->
+    <linearGradient id="headlightBeamGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stopColor="rgba(255, 255, 230, 0.75)" />
+      <stop offset="15%" stopColor="rgba(254, 240, 138, 0.45)" />
+      <stop offset="40%" stopColor="rgba(56, 189, 248, 0.25)" />
+      <stop offset="75%" stopColor="rgba(0, 229, 255, 0.10)" />
+      <stop offset="100%" stopColor="rgba(0, 229, 255, 0)" />
+    </linearGradient>
+
+    <!-- Headlight Bloom Glow Filter -->
+    <filter id="headlightGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Cyan Neon Accent Filter -->
+    <filter id="cyanNeonFilter" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Coach Body Drop Shadow -->
+    <filter id="chassisShadow" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.65" />
+    </filter>
+  </defs>
+
+  <!-- ======================================================== -->
+  <!-- 1. VOLUMETRIC FORWARD HEADLIGHT BEAM                     -->
+  <!-- ======================================================== -->
+  <polygon points="816,182 880,140 880,240 816,198" fill="url(#headlightBeamGrad)" />
+
+  <g filter="url(#chassisShadow)">
+    <!-- ======================================================== -->
+    <!-- 2. MAIN AERODYNAMIC COACH CHASSIS OUTLINE               -->
+    <!-- ======================================================== -->
+    <!-- Coach profile with rear (148-242) and front (648-742) wheel arch cutouts -->
+    <path
+      d="M 58,198
+         L 58,74
+         Q 58,44 86,38
+         Q 140,32 260,32
+         L 700,32
+         Q 750,34 782,60
+         L 818,124
+         Q 830,148 826,178
+         L 816,218
+         L 746,218
+         A 48,48 0 0,0 644,218
+         L 246,218
+         A 48,48 0 0,0 144,218
+         L 64,218
+         Q 58,214 58,198
+         Z"
+      fill="url(#pearlWhiteGrad)"
+      stroke="#CBD5E1"
+      strokeWidth="1.8"
+    />
+
+    <!-- Roofline Specular Highlight Edge -->
+    <path
+      d="M 86,38 Q 140,32 260,32 L 700,32 Q 746,34 778,56"
+      stroke="#FFFFFF"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+    />
+
+    <!-- Roof AC Climate Pods & Aerodynamic Fins -->
+    <rect x="250" y="20" width="270" height="13" rx="6" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="1" />
+    <rect x="265" y="23" width="240" height="7" rx="3.5" fill="#475569" />
+    <!-- Intake louver slats -->
+    <line x1="290" y1="23" x2="290" y2="30" stroke="#334155" strokeWidth="1.5" />
+    <line x1="330" y1="23" x2="330" y2="30" stroke="#334155" strokeWidth="1.5" />
+    <line x1="370" y1="23" x2="370" y2="30" stroke="#334155" strokeWidth="1.5" />
+    <line x1="410" y1="23" x2="410" y2="30" stroke="#334155" strokeWidth="1.5" />
+    <line x1="450" y1="23" x2="450" y2="30" stroke="#334155" strokeWidth="1.5" />
+    <line x1="480" y1="23" x2="480" y2="30" stroke="#334155" strokeWidth="1.5" />
+
+    <!-- Rear Roof Integrated Air Deflector / Fin -->
+    <path d="M 58,56 Q 58,38 76,34 L 92,34 L 76,52 Z" fill="#94A3B8" />
+
+    <!-- ======================================================== -->
+    <!-- 3. LOWER MAROON & CRIMSON LIVERY SWOOSHES               -->
+    <!-- ======================================================== -->
+    <!-- Main lower coach body wrap in deep rich maroon -->
+    <path
+      d="M 58,150
+         L 58,198
+         Q 58,214 64,218
+         L 144,218
+         A 48,48 0 0,1 246,218
+         L 644,218
+         A 48,48 0 0,1 746,218
+         L 816,218
+         L 824,186
+         Q 826,168 818,154
+         Q 710,138 580,158
+         Q 420,180 270,146
+         Q 160,128 58,150
+         Z"
+      fill="url(#maroonLiveryGrad)"
+    />
+
+    <!-- Secondary dynamic crimson swoosh sweeping up towards coach rear -->
+    <path
+      d="M 58,172
+         Q 150,142 270,166
+         Q 370,186 500,166
+         Q 370,196 260,182
+         Q 140,168 58,188
+         Z"
+      fill="url(#crimsonSwooshGrad)"
+      opacity="0.95"
+    />
+
+    <!-- High-speed aerodynamic golden ribbon accent -->
+    <path
+      d="M 110,142
+         Q 220,132 340,156
+         Q 460,180 610,162
+         L 615,166
+         Q 460,185 340,160
+         Q 220,136 110,146
+         Z"
+      fill="url(#goldRibbonGrad)"
+      opacity="0.88"
+    />
+
+    <!-- Front quarter aerodynamic maroon swoosh wrapping into bumper -->
+    <path
+      d="M 570,172
+         Q 670,148 808,168
+         L 814,182
+         Q 680,162 575,185
+         Z"
+      fill="url(#maroonLiveryGrad)"
+    />
+
+    <!-- Polished Silver Chrome Body Separator Line -->
+    <path
+      d="M 58,138
+         L 720,138
+         Q 770,140 812,154"
+      stroke="url(#chromeTrimGrad)"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+    />
+
+    <!-- ======================================================== -->
+    <!-- 4. PANORAMIC PASSENGER WINDOWS WITH WARM CABIN LIGHT   -->
+    <!-- ======================================================== -->
+    <!-- Dark panoramic background glass ribbon -->
+    <path
+      d="M 82,50
+         L 712,50
+         Q 754,52 780,74
+         L 806,128
+         L 82,128
+         Z"
+      fill="url(#panoramicGlassGrad)"
+      stroke="#0F172A"
+      strokeWidth="2.5"
+    />
+
+    <!-- Individual Panoramic Passenger Window Bays with Warm Lighting -->
+    <g opacity="0.96">
+      <!-- Window 1 -->
+      <rect x="94" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="106" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="108" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 2 -->
+      <rect x="166" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="178" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="180" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 3 -->
+      <rect x="238" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="250" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="252" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 4 -->
+      <rect x="310" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="322" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="324" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 5 -->
+      <rect x="382" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="394" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="396" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 6 -->
+      <rect x="454" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="466" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="468" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 7 -->
+      <rect x="526" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="538" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="540" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 8 -->
+      <rect x="598" y="56" width="64" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="610" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="612" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+      <!-- Window 9 (Front Passenger) -->
+      <rect x="670" y="56" width="56" height="66" rx="6" fill="url(#windowWarmGlow)" stroke="#1E293B" strokeWidth="1.8" />
+      <rect x="680" y="82" width="22" height="28" rx="4" fill="#B45309" opacity="0.9" />
+      <rect x="682" y="76" width="18" height="12" rx="3.5" fill="#F59E0B" />
+    </g>
+
+    <!-- Glass Specular Reflection Sheen (Top Diagonal) -->
+    <path
+      d="M 94,58 L 710,58 Q 748,60 774,78 L 800,122"
+      stroke="rgba(255, 255, 255, 0.28)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+
+    <!-- Aerodynamic Raked Cockpit Windshield -->
+    <path
+      d="M 732,50
+         Q 768,52 790,74
+         L 814,126
+         L 736,126
+         Z"
+      fill="#050914"
+      opacity="0.94"
+    />
+    <!-- Driver silhouette & steering column -->
+    <ellipse cx="762" cy="116" rx="8" ry="12" fill="#334155" opacity="0.8" />
+    <circle cx="760" cy="98" r="6" fill="#334155" opacity="0.8" />
+    <line x1="768" y1="110" x2="778" y2="118" stroke="#1E293B" strokeWidth="3" />
+
+    <!-- Sleek Aerodynamic Touring Mirror -->
+    <path
+      d="M 750,42
+         Q 790,36 802,62
+         L 796,82
+         Q 780,60 748,54
+         Z"
+      fill="#0F172A"
+      stroke="#334155"
+      strokeWidth="1.4"
+    />
+    <ellipse cx="798" cy="74" rx="4.5" ry="10" fill="#1E293B" stroke="#00E5FF" strokeWidth="0.8" />
+
+    <!-- Passenger Door Seam -->
+    <line x1="734" y1="50" x2="734" y2="216" stroke="#94A3B8" strokeWidth="1.2" opacity="0.6" />
+    <rect x="740" y="152" width="3.5" height="14" rx="1.5" fill="#475569" />
+
+    <!-- ======================================================== -->
+    <!-- 5. "TRIPPILOT TRAVELS" LUXURY SERIF BRANDING            -->
+    <!-- ======================================================== -->
+    <!-- Roofband Mountain Crest Icon -->
+    <g transform="translate(420, 36)">
+      <polygon points="0,9 7,2 12,7 17,1 24,9" fill="#801220" />
+      <path d="M -3,10 Q 12,6 27,10" stroke="#801220" strokeWidth="1.2" fill="none" />
+    </g>
+    <!-- Crisp Serif Typographic Wordmark -->
+    <text
+      x="452"
+      y="45"
+      font-family="'Playfair Display', 'Cinzel', 'Georgia', serif"
+      font-size="13.5"
+      font-weight="800"
+      font-style="italic"
+      fill="#801220"
+      letter-spacing="1.4"
+    >
+      TripPilot Travels
+    </text>
+
+    <!-- Side Panel Gold/White Mountain & Road Emblem (above rear wheel) -->
+    <g transform="translate(262, 136)">
+      <!-- Maroon background plaque -->
+      <polygon points="0,22 16,6 24,14 32,2 48,22" fill="#801220" opacity="0.95" />
+      <!-- Crisp White Snowcaps -->
+      <polygon points="12,17 16,6 21,15" fill="#FFFFFF" opacity="0.95" />
+      <polygon points="28,12 32,2 36,13" fill="#FFFFFF" opacity="0.95" />
+      <!-- Golden Winding Road Silhouette -->
+      <path d="M -4,23 Q 24,16 52,23" stroke="#FDE68A" strokeWidth="2" fill="none" />
+    </g>
+
+    <!-- ======================================================== -->
+    <!-- 6. HIGH-PRECISION HEADLIGHTS, GRILL & DETAILS           -->
+    <!-- ======================================================== -->
+    <!-- Xenon LED Dual Headlight Assembly -->
+    <g filter="url(#headlightGlowFilter)">
+      <!-- Main projector bulb -->
+      <ellipse cx="816" cy="184" rx="8" ry="6.5" fill="#FFFFFF" />
+      <ellipse cx="819" cy="184" rx="5" ry="4.5" fill="#BAE6FD" />
+      <circle cx="820" cy="184" r="2.8" fill="#00E5FF" />
+      <!-- Lower auxiliary driving light -->
+      <ellipse cx="812" cy="196" rx="5" ry="3.5" fill="#FFFFFF" opacity="0.9" />
+      <circle cx="813" cy="196" r="2" fill="#67E8F9" />
+    </g>
+    <!-- Cyan Neon DRL (Daytime Running Light) Brow -->
+    <path
+      d="M 804,174 Q 822,176 826,186"
+      stroke="#00E5FF"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      filter="url(#cyanNeonFilter)"
+    />
+    <!-- Amber Front Side Marker Reflector -->
+    <rect x="794" y="196" width="9" height="4" rx="1.8" fill="#F59E0B" />
+
+    <!-- Rear Vertical Red LED Taillight Bar -->
+    <rect x="58" y="156" width="5" height="30" rx="2.5" fill="#EF4444" />
+    <rect x="58" y="162" width="2.5" height="18" fill="#FCA5A5" />
+
+    <!-- Front Bumper Air Dam & Matte Grille -->
+    <rect x="756" y="198" width="60" height="16" rx="3" fill="#090E17" />
+    <line x1="762" y1="202" x2="812" y2="202" stroke="#1E293B" strokeWidth="1.2" />
+    <line x1="762" y1="206" x2="812" y2="206" stroke="#1E293B" strokeWidth="1.2" />
+    <line x1="762" y1="210" x2="812" y2="210" stroke="#1E293B" strokeWidth="1.2" />
+
+    <!-- Luggage Bay Panel Seams & Handles -->
+    <g stroke="#94A3B8" strokeWidth="1.1" opacity="0.6">
+      <rect x="330" y="164" width="70" height="48" rx="2" fill="none" />
+      <rect x="410" y="164" width="70" height="48" rx="2" fill="none" />
+      <rect x="490" y="164" width="70" height="48" rx="2" fill="none" />
+      <rect x="570" y="164" width="64" height="48" rx="2" fill="none" />
+      <!-- Chrome Latches -->
+      <rect x="360" y="202" width="8" height="3.5" rx="1" fill="#CBD5E1" />
+      <rect x="440" y="202" width="8" height="3.5" rx="1" fill="#CBD5E1" />
+      <rect x="520" y="202" width="8" height="3.5" rx="1" fill="#CBD5E1" />
+      <rect x="598" y="202" width="8" height="3.5" rx="1" fill="#CBD5E1" />
+    </g>
+
+    <!-- Lower Chassis Undercarriage Skirt -->
+    <rect x="58" y="214" width="760" height="7" fill="#090E17" />
+
+    <!-- ======================================================== -->
+    <!-- 7. DARK WHEEL WELL CAVITIES                              -->
+    <!-- ======================================================== -->
+    <!-- Rear Wheel Well Inner Cavity (Behind rotating wheel layer) -->
+    <path d="M 144,218 A 51,51 0 0,1 246,218 Z" fill="#040711" />
+    <path d="M 142,218 A 53,53 0 0,1 248,218" stroke="#1E293B" strokeWidth="2.8" fill="none" />
+
+    <!-- Front Wheel Well Inner Cavity (Behind rotating wheel layer) -->
+    <path d="M 644,218 A 51,51 0 0,1 746,218 Z" fill="#040711" />
+    <path d="M 642,218 A 53,53 0 0,1 748,218" stroke="#1E293B" strokeWidth="2.8" fill="none" />
+  </g>
+</svg>

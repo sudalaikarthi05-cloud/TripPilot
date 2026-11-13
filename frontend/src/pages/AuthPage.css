@@ -1,0 +1,1440 @@
+/* ==========================================================================
+   TRIPPILOT TRAVELS — PREMIUM CINEMATIC LOGIN & BUS JOURNEY STYLES
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. MAIN SCENE CANVAS
+   -------------------------------------------------------------------------- */
+.trippilot-auth-scene {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background-color: #030712;
+  color: #f8fafc;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  user-select: none;
+}
+
+/* Deep Futuristic Sky Backdrop with Radial Center Glow */
+.futuristic-sky-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse 85% 65% at 50% 28%,
+      #0d2244 0%,
+      #08162e 45%,
+      #040a17 80%,
+      #02050c 100%
+    );
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   2. FAR SCENERY: MOUNTAIN SILHOUETTE & PARALLAX
+   -------------------------------------------------------------------------- */
+.far-mountain-skyline {
+  position: absolute;
+  left: 0;
+  bottom: 15%;
+  width: 100%;
+  height: clamp(140px, 24vh, 260px);
+  z-index: 2;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.skyline-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.far-mountain-skyline.far-parallax-active {
+  transform: translate3d(-5vw, 0, 0);
+  transition: transform 7.5s cubic-bezier(0.28, 0, 0.25, 1);
+}
+
+/* Mid-ground Slow Atmospheric Mist */
+.atmospheric-mist-band {
+  position: absolute;
+  left: 0;
+  bottom: 14%;
+  width: 120%;
+  height: 120px;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.45;
+  filter: blur(18px);
+  will-change: transform;
+}
+
+.atmospheric-mist-band.mist-parallax-active {
+  transform: translate3d(-10vw, 0, 0);
+  transition: transform 7.5s cubic-bezier(0.28, 0, 0.25, 1);
+}
+
+.mist-cloud {
+  position: absolute;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(56, 189, 248, 0.25) 0%,
+    rgba(14, 165, 233, 0.12) 40%,
+    transparent 70%
+  );
+}
+
+.mist-cloud.cloud-1 {
+  width: 55%;
+  left: -5%;
+  animation: mistDrift1 24s ease-in-out infinite alternate;
+}
+
+.mist-cloud.cloud-2 {
+  width: 60%;
+  right: -5%;
+  animation: mistDrift2 28s ease-in-out infinite alternate;
+}
+
+@keyframes mistDrift1 {
+  0% { transform: translateX(0); opacity: 0.35; }
+  100% { transform: translateX(8vw); opacity: 0.55; }
+}
+
+@keyframes mistDrift2 {
+  0% { transform: translateX(0); opacity: 0.4; }
+  100% { transform: translateX(-8vw); opacity: 0.6; }
+}
+
+/* Floating Starlight Motes */
+.floating-starlight-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.star-mote {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  pointer-events: none;
+  animation: starlightPulse 4s ease-in-out infinite alternate;
+}
+
+.star-mote.s1 { top: 12%; left: 14%; width: 2px; height: 2px; box-shadow: 0 0 6px #00e5ff; animation-delay: 0s; }
+.star-mote.s2 { top: 22%; left: 28%; width: 3px; height: 3px; box-shadow: 0 0 8px #fde68a; animation-delay: 1.2s; }
+.star-mote.s3 { top: 8%; left: 45%; width: 2px; height: 2px; box-shadow: 0 0 6px #ffffff; animation-delay: 2.1s; }
+.star-mote.s4 { top: 18%; left: 62%; width: 2.5px; height: 2.5px; box-shadow: 0 0 8px #00e5ff; animation-delay: 0.7s; }
+.star-mote.s5 { top: 28%; left: 78%; width: 2px; height: 2px; box-shadow: 0 0 6px #fde68a; animation-delay: 2.8s; }
+.star-mote.s6 { top: 14%; left: 88%; width: 3px; height: 3px; box-shadow: 0 0 8px #ffffff; animation-delay: 1.6s; }
+.star-mote.s7 { top: 32%; left: 22%; width: 2px; height: 2px; box-shadow: 0 0 6px #00e5ff; animation-delay: 3.2s; }
+.star-mote.s8 { top: 26%; left: 92%; width: 2px; height: 2px; box-shadow: 0 0 6px #fde68a; animation-delay: 1.9s; }
+
+@keyframes starlightPulse {
+  0% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 0.95; transform: scale(1.3); }
+  100% { opacity: 0.3; transform: scale(0.9); }
+}
+
+/* --------------------------------------------------------------------------
+   3. MINIMALIST HUD CORNER FRAMING BRACKETS
+   -------------------------------------------------------------------------- */
+.hud-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  z-index: 8;
+  pointer-events: none;
+  border-color: rgba(0, 229, 255, 0.4);
+  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.35));
+}
+
+.hud-corner.top-left {
+  top: 24px;
+  left: 24px;
+  border-top: 1.5px solid rgba(0, 229, 255, 0.45);
+  border-left: 1.5px solid rgba(0, 229, 255, 0.45);
+}
+
+.hud-corner.top-right {
+  top: 24px;
+  right: 24px;
+  border-top: 1.5px solid rgba(0, 229, 255, 0.45);
+  border-right: 1.5px solid rgba(0, 229, 255, 0.45);
+}
+
+.hud-corner.bottom-left {
+  bottom: 24px;
+  left: 24px;
+  border-bottom: 1.5px solid rgba(0, 229, 255, 0.45);
+  border-left: 1.5px solid rgba(0, 229, 255, 0.45);
+}
+
+.hud-corner.bottom-right {
+  bottom: 24px;
+  right: 24px;
+  border-bottom: 1.5px solid rgba(0, 229, 255, 0.45);
+  border-right: 1.5px solid rgba(0, 229, 255, 0.45);
+}
+
+/* Skip Button */
+.journey-skip-btn {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(10, 20, 38, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 999px;
+  color: #f8fafc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 12px rgba(0, 229, 255, 0.2);
+}
+
+.journey-skip-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00e5ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 229, 255, 0.4);
+}
+
+.journey-skip-btn:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.skip-arrow {
+  font-size: 0.75rem;
+  color: #00e5ff;
+}
+
+/* --------------------------------------------------------------------------
+   4. GLOSSY WET ROAD & PARALLAX NEON STREAKS
+   -------------------------------------------------------------------------- */
+.neon-road-surface {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: clamp(120px, 18vh, 180px);
+  background: linear-gradient(
+    180deg,
+    #071120 0%,
+    #050c18 35%,
+    #02060d 75%,
+    #000000 100%
+  );
+  z-index: 4;
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 229, 255, 0.35);
+  box-shadow: inset 0 2px 20px rgba(0, 229, 255, 0.18);
+}
+
+/* Wet reflective sheen on asphalt */
+.road-wet-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 229, 255, 0.08) 0%,
+    rgba(56, 189, 248, 0.03) 30%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Road Neon Speed Streaks */
+.road-streaks-group {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.road-neon-streak {
+  position: absolute;
+  height: 2.5px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 229, 255, 0.3) 15%,
+    #00e5ff 50%,
+    #ffffff 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px #00e5ff, 0 0 16px rgba(0, 229, 255, 0.6);
+  opacity: 0.85;
+}
+
+.road-neon-streak.line-1 { top: 22%; left: 8%; width: 180px; animation: streakDrift1 9s linear infinite; }
+.road-neon-streak.line-2 { top: 44%; left: 38%; width: 260px; animation: streakDrift2 7.5s linear infinite; }
+.road-neon-streak.line-3 { top: 68%; left: 65%; width: 320px; animation: streakDrift3 6.8s linear infinite; }
+.road-neon-streak.line-4 { top: 32%; left: 78%; width: 140px; animation: streakDrift1 8s linear infinite; }
+.road-neon-streak.line-5 { top: 56%; left: 14%; width: 220px; animation: streakDrift2 8.5s linear infinite; }
+.road-neon-streak.line-6 { top: 82%; left: 45%; width: 200px; animation: streakDrift3 7s linear infinite; }
+
+@keyframes streakDrift1 {
+  0% { transform: translateX(10vw); }
+  100% { transform: translateX(-110vw); }
+}
+
+@keyframes streakDrift2 {
+  0% { transform: translateX(15vw); }
+  100% { transform: translateX(-115vw); }
+}
+
+@keyframes streakDrift3 {
+  0% { transform: translateX(20vw); }
+  100% { transform: translateX(-120vw); }
+}
+
+/* High-speed parallax acceleration during bus drive */
+.road-streaks-group.road-parallax-active .road-neon-streak {
+  animation-duration: 2.2s !important;
+}
+
+/* Faint background bus silhouette in idle state */
+.backdrop-bus-preview {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(520px, 58vw, 840px);
+  aspect-ratio: 880 / 280;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.16;
+  filter: blur(2px) grayscale(40%);
+  transition: opacity 0.5s ease;
+}
+
+.bg-bus-faint {
+  width: 100%;
+  height: 100%;
+  background: url('/assets/bus-coach.svg') no-repeat center / contain;
+}
+
+/* --------------------------------------------------------------------------
+   5. CINEMATIC LUXURY COACH BUS & TRAILING FLAG RIG
+   -------------------------------------------------------------------------- */
+.bus-journey-rig {
+  position: absolute;
+  bottom: 8%;
+  left: 0;
+  width: clamp(520px, 58vw, 840px);
+  aspect-ratio: 880 / 280;
+  z-index: 10;
+  pointer-events: none;
+  transform: translate3d(-125%, 0, 0);
+  will-change: transform;
+}
+
+/* Continuous 7.5s crossing matching BUS_DURATION_MS = 7500 with gentle ease-in-out */
+.bus-journey-rig.bus-journey-active {
+  animation: cinematicBusCrossing 7.5s cubic-bezier(0.28, 0, 0.25, 1) forwards;
+}
+
+@keyframes cinematicBusCrossing {
+  0% {
+    transform: translate3d(-125%, 0, 0);
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  /* Enters from left, nose visible */
+  22% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  /* Bus and trailing flag clearly centered */
+  48% {
+    transform: translate3d(14vw, 0, 0);
+  }
+  /* Cruising center-right */
+  72% {
+    transform: translate3d(48vw, 0, 0);
+  }
+  /* Exits completely past the right edge */
+  100% {
+    transform: translate3d(125vw, 0, 0);
+    opacity: 1;
+  }
+}
+
+/* Suspension micro-bob & forward tilt */
+.luxury-coach-bus {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.bus-suspension-motion {
+  animation: coachSuspensionBob 2.6s ease-in-out infinite;
+  transform-origin: 75% 80%;
+}
+
+@keyframes coachSuspensionBob {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-2.5px) rotate(-0.35deg);
+  }
+  65% {
+    transform: translateY(1.5px) rotate(0.2deg);
+  }
+}
+
+/* Slight forward pitch during acceleration */
+.bus-journey-active .bus-suspension-motion {
+  transform: rotate(0.4deg);
+}
+
+.bus-vector-art {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.75));
+}
+
+/* Volumetric Headlight Projection Beam */
+.headlight-volumetric-beam {
+  position: absolute;
+  top: 55%;
+  left: 92%;
+  width: clamp(140px, 18vw, 260px);
+  height: clamp(60px, 9vh, 110px);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 240, 0.7) 0%,
+    rgba(254, 240, 138, 0.35) 18%,
+    rgba(56, 189, 248, 0.18) 50%,
+    rgba(0, 229, 255, 0.05) 80%,
+    transparent 100%
+  );
+  clip-path: polygon(0% 40%, 100% 0%, 100% 100%, 0% 60%);
+  filter: blur(4px);
+  pointer-events: none;
+  animation: beamBreathing 3s ease-in-out infinite alternate;
+}
+
+@keyframes beamBreathing {
+  0% { opacity: 0.75; transform: scaleX(0.96); }
+  100% { opacity: 0.95; transform: scaleX(1.05); }
+}
+
+/* --------------------------------------------------------------------------
+   6. SEPARATE ROTATING WHEELS WITH NEON CYAN RINGS
+   -------------------------------------------------------------------------- */
+.bus-wheel {
+  position: absolute;
+  top: 77.86%;
+  width: 11.6%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  pointer-events: none;
+}
+
+.bus-wheel.rear-wheel {
+  left: 22.16%;
+}
+
+.bus-wheel.front-wheel {
+  left: 78.98%;
+}
+
+/* Rubber Tire */
+.wheel-rubber-tire {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    #111827 0%,
+    #0b0f19 55%,
+    #05080f 85%,
+    #020408 100%
+  );
+  border: 1.5px solid #1f293d;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.85);
+}
+
+/* Glowing Neon Cyan Wheel Ring */
+.cyan-neon-ring {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 2.8px solid #00e5ff;
+  box-shadow:
+    0 0 8px #00e5ff,
+    0 0 16px #00e5ff,
+    0 0 28px rgba(0, 229, 255, 0.8),
+    inset 0 0 8px #00e5ff;
+  z-index: 2;
+}
+
+/* Spinning Alloy Rim Spokes */
+.spinning-wheel-spokes {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    #475569 0deg 20deg,
+    #0f172a 20deg 45deg,
+    #94a3b8 45deg 55deg,
+    #0f172a 55deg 90deg
+  );
+  border: 1px solid #64748b;
+  animation: spinWheelRims 0.65s linear infinite;
+  z-index: 1;
+}
+
+@keyframes spinWheelRims {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Center Hub Cap with Glowing Cyan Center Dot */
+.wheel-hub-cap {
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #00e5ff 0%, #0284c7 35%, #0f172a 75%);
+  border: 1px solid #38bdf8;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.9);
+  z-index: 3;
+}
+
+/* Cyan Neon Ground Glow Pool Under Wheels */
+.wheel-ground-neon-glow {
+  position: absolute;
+  bottom: -32%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 170%;
+  height: 38px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 229, 255, 0.55) 0%,
+    rgba(0, 229, 255, 0.18) 45%,
+    transparent 72%
+  );
+  filter: blur(3px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Trailing Tire Mist / Spray */
+.wheel-mist-spray {
+  position: absolute;
+  bottom: 0%;
+  left: -40%;
+  width: 50px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(56, 189, 248, 0.15) 50%,
+    transparent 80%
+  );
+  filter: blur(4px);
+  opacity: 0.65;
+  animation: mistPuff 0.8s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes mistPuff {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0.65; }
+  100% { transform: translate(-30px, -6px) scale(1.4); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   7. WET-ROAD BUS REFLECTION (FLIPPED, FADED, BLURRED)
+   -------------------------------------------------------------------------- */
+.bus-wet-road-reflection {
+  position: absolute;
+  top: 96%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scaleY(-0.72) translateY(-14px);
+  filter: blur(2.2px) brightness(0.85);
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.38) 0%, transparent 75%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.38) 0%, transparent 75%);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.bus-reflection-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.reflection-wheel {
+  position: absolute;
+  top: 77.86%;
+  width: 11.6%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reflection-wheel.rear-reflect { left: 22.16%; }
+.reflection-wheel.front-reflect { left: 78.98%; }
+
+.reflect-neon-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #00e5ff;
+  box-shadow: 0 0 14px #00e5ff;
+}
+
+/* --------------------------------------------------------------------------
+   8. REAL FABRIC TRAILING REAR FLAG
+   -------------------------------------------------------------------------- */
+.bus-flag-assembly {
+  position: absolute;
+  top: 24%;
+  left: -38%;
+  width: 42%;
+  height: 52%;
+  pointer-events: none;
+  z-index: 11;
+  display: flex;
+  align-items: center;
+}
+
+/* Stainless Steel Mounting Pole */
+.flag-mounting-pole {
+  position: absolute;
+  right: -8px;
+  top: 10%;
+  bottom: 0%;
+  width: 4.5px;
+  background: linear-gradient(
+    90deg,
+    #64748b 0%,
+    #f8fafc 40%,
+    #cbd5e1 70%,
+    #475569 100%
+  );
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 4px rgba(255, 255, 255, 0.3);
+  z-index: 5;
+}
+
+.flag-mounting-brackets {
+  position: absolute;
+  right: -13px;
+  top: 18%;
+  bottom: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 6;
+}
+
+.flag-bracket-bolt {
+  width: 9px;
+  height: 9px;
+  background: #cbd5e1;
+  border: 1px solid #334155;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Waving Fabric Pennant Banner */
+.flag-cloth-wave {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: right center;
+  animation: flagWave3D 2.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes flagWave3D {
+  0%, 100% {
+    transform: perspective(600px) rotateY(-4deg) skewY(1deg) scaleY(0.98);
+  }
+  35% {
+    transform: perspective(600px) rotateY(6deg) skewY(-2deg) scaleY(1.02);
+  }
+  70% {
+    transform: perspective(600px) rotateY(-2deg) skewY(1.5deg) scaleY(0.99);
+  }
+}
+
+.flag-svg-banner {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.65));
+}
+
+/* Crisp HTML/SVG Flag Typography & Mountain Crest */
+.flag-content-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.2vw, 16px);
+  padding: 0 16px;
+  z-index: 3;
+}
+
+.flag-mountain-icon-wrap {
+  width: clamp(28px, 3.6vw, 48px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+.flag-mountain-icon {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+}
+
+.flag-typography {
+  display: flex;
+  flex-direction: column;
+  color: #fde68a;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85), 0 0 8px rgba(253, 230, 138, 0.45);
+}
+
+.flag-headline {
+  font-size: clamp(0.65rem, 0.9vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #ffffff;
+}
+
+.flag-subline {
+  font-size: clamp(0.7rem, 0.95vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fde68a;
+}
+
+/* Moving Specular Sheen Sweeping Across Fabric */
+.flag-fabric-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.03) 70%,
+    transparent 100%
+  );
+  border-radius: 4px;
+  pointer-events: none;
+  animation: flagSheenSweep 3.6s ease-in-out infinite;
+}
+
+@keyframes flagSheenSweep {
+  0% { transform: translateX(-100%); opacity: 0; }
+  25% { opacity: 0.8; }
+  50% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   9. FLOATING GREETING BANNER: "HAPPY JOURNEY, {FIRSTNAME}!"
+   -------------------------------------------------------------------------- */
+.journey-greeting-banner {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  text-align: center;
+  animation: greetingElegantEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
+  width: min(92vw, 780px);
+}
+
+@keyframes greetingElegantEntrance {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -20px) scale(0.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+.journey-greeting-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 229, 255, 0.25) 0%,
+    rgba(253, 230, 138, 0.15) 35%,
+    transparent 70%
+  );
+  filter: blur(24px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.journey-greeting-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 999px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.journey-greeting-title {
+  font-family: 'Playfair Display', 'Cinzel', 'Georgia', serif;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  text-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.8),
+    0 0 24px rgba(255, 255, 255, 0.4),
+    0 0 40px rgba(0, 229, 255, 0.35);
+}
+
+.greeting-first-name {
+  color: #fde68a;
+  text-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.8),
+    0 0 24px rgba(253, 230, 138, 0.7);
+}
+
+.journey-greeting-subline {
+  margin-top: 10px;
+  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+  font-weight: 400;
+  color: #94a3b8;
+  letter-spacing: 0.4px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* --------------------------------------------------------------------------
+   10. PREMIUM GLASSMORPHIC LOGIN POPUP CARD
+   -------------------------------------------------------------------------- */
+.trippilot-login-popup-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  padding: 20px;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.trippilot-login-popup-wrapper.popup-fadeout {
+  opacity: 0;
+  transform: scale(0.95) translateY(12px);
+  pointer-events: none;
+}
+
+.login-glass-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(8, 15, 29, 0.76);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 20px;
+  padding: 32px 36px 36px;
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.16),
+    0 24px 60px -12px rgba(0, 0, 0, 0.85),
+    0 0 36px -8px rgba(0, 229, 255, 0.16);
+  animation: cardFloatIdle 8s ease-in-out infinite;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+@keyframes cardFloatIdle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Brand Logo at Card Top */
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.brand-mountain-svg {
+  width: 38px;
+  height: 26px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+}
+
+.brand-card-title {
+  margin: 0;
+  font-family: 'Playfair Display', 'Cinzel', 'Georgia', serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Sliding Mode Tabs */
+.card-mode-toggle-tabs {
+  position: relative;
+  display: flex;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 22px;
+}
+
+.mode-tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.25s ease;
+}
+
+.mode-tab-btn.active {
+  color: #ffffff;
+}
+
+.tab-indicator-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: calc(50% - 4px);
+  background: linear-gradient(135deg, rgba(150, 23, 39, 0.85), rgba(102, 12, 23, 0.95));
+  border: 1px solid rgba(253, 230, 138, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 12px rgba(150, 23, 39, 0.4);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.tab-indicator-pill.login {
+  transform: translateX(0);
+}
+
+.tab-indicator-pill.register {
+  transform: translateX(100%);
+}
+
+.login-card-headings {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.welcome-back-heading {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.login-sub-heading {
+  margin: 6px 0 0;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+
+/* Error Toast Alert */
+.login-error-toast {
+  background: rgba(225, 29, 72, 0.16);
+  border: 1px solid rgba(244, 63, 94, 0.45);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  color: #fecdd3;
+  font-size: 0.84rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: shakeError 0.4s ease;
+}
+
+@keyframes shakeError {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Form Fields */
+.login-popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.popup-input-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 0 14px;
+  transition: all 0.25s ease;
+}
+
+.popup-input-field:focus-within {
+  border-color: #00e5ff;
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow:
+    0 0 0 3px rgba(0, 229, 255, 0.25),
+    0 0 18px rgba(0, 229, 255, 0.18);
+}
+
+.field-input-icon {
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  transition: color 0.2s ease;
+}
+
+.popup-input-field:focus-within .field-input-icon {
+  color: #00e5ff;
+}
+
+.popup-input-field input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.92rem;
+  padding: 13px 0;
+  width: 100%;
+}
+
+.popup-input-field input::placeholder {
+  color: #64748b;
+  font-size: 0.88rem;
+}
+
+.pw-toggle-action {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+}
+
+.pw-toggle-action:hover {
+  color: #00e5ff;
+}
+
+/* Options Row: Remember Me & Forgot Password */
+.popup-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  margin-top: -2px;
+}
+
+.remember-me-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.remember-me-toggle input {
+  accent-color: #961727;
+  cursor: pointer;
+}
+
+.forgot-pw-action {
+  background: none;
+  border: none;
+  color: #38bdf8;
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.forgot-pw-action:hover {
+  color: #00e5ff;
+  text-decoration: underline;
+}
+
+/* Maroon Luxury Submit Button with Shine Sweep */
+.maroon-login-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #961727 0%, #801220 50%, #540913 100%);
+  border: 1px solid rgba(253, 230, 138, 0.45);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 13px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(150, 23, 39, 0.5), 0 0 12px rgba(253, 230, 138, 0.2);
+  transition: all 0.25s ease;
+  margin-top: 4px;
+}
+
+.maroon-login-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #a81c2e 0%, #8f1525 50%, #610b17 100%);
+  box-shadow: 0 6px 24px rgba(150, 23, 39, 0.7), 0 0 18px rgba(253, 230, 138, 0.35);
+  transform: translateY(-1.5px);
+}
+
+.maroon-login-btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+.maroon-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Button Shine Sweep Effect */
+.btn-shine-sweep {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.maroon-login-btn:hover .btn-shine-sweep {
+  left: 140%;
+}
+
+.btn-loading-flex {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.login-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spinWheelRims 0.7s linear infinite;
+}
+
+/* Create Account Prompt Switcher */
+.create-account-prompt {
+  text-align: center;
+  margin-top: 6px;
+}
+
+.create-account-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s ease;
+}
+
+.create-account-btn:hover {
+  color: #00e5ff;
+}
+
+/* --------------------------------------------------------------------------
+   11. FORGOT PASSWORD MODAL
+   -------------------------------------------------------------------------- */
+.forgot-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.forgot-modal-box {
+  width: 100%;
+  max-width: 400px;
+  background: #0b1528;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 24px rgba(0, 229, 255, 0.15);
+}
+
+.modal-title {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.modal-text {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.modal-email-box {
+  width: 100%;
+  background: #060c18;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.modal-email-box:focus {
+  border-color: #00e5ff;
+  box-shadow: 0 0 0 2px rgba(0, 229, 255, 0.3);
+}
+
+.modal-btn-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-btn {
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-btn.cancel {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #94a3b8;
+}
+
+.modal-btn.confirm {
+  background: linear-gradient(135deg, #961727, #660c17);
+  border: 1px solid rgba(253, 230, 138, 0.4);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   12. CINEMATIC VEIL TRANSITION INTO HOME PAGE
+   -------------------------------------------------------------------------- */
+.cinematic-home-transition-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: #02060e;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cinematic-home-transition-veil.veil-active {
+  opacity: 1;
+}
+
+.cinematic-lens-bloom {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(253, 230, 138, 0.45) 0%,
+    rgba(0, 229, 255, 0.25) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  transform: scale(0.6);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.veil-active .cinematic-lens-bloom {
+  transform: scale(3.5);
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE DESIGN (390PX TO 1440PX)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .login-glass-card {
+    padding: 26px 20px 28px;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+
+  .brand-card-title {
+    font-size: 1.25rem;
+  }
+
+  .welcome-back-heading {
+    font-size: 1.35rem;
+  }
+
+  .journey-greeting-title {
+    font-size: 1.85rem;
+  }
+
+  .journey-greeting-subline {
+    font-size: 0.92rem;
+  }
+
+  .hud-corner {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hud-corner.top-left { top: 14px; left: 14px; }
+  .hud-corner.top-right { top: 14px; right: 14px; }
+  .hud-corner.bottom-left { bottom: 14px; left: 14px; }
+  .hud-corner.bottom-right { bottom: 14px; right: 14px; }
+
+  .bus-journey-rig {
+    bottom: 7%;
+    width: clamp(340px, 92vw, 560px);
+  }
+
+  /* Reduce particles for mobile performance */
+  .star-mote.s3,
+  .star-mote.s5,
+  .star-mote.s7 {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .trippilot-login-popup-wrapper {
+    padding: 14px;
+  }
+
+  .login-glass-card {
+    padding: 22px 16px 24px;
+  }
+
+  .brand-card-title {
+    font-size: 1.15rem;
+  }
+
+  .welcome-back-heading {
+    font-size: 1.2rem;
+  }
+
+  .popup-input-field input {
+    font-size: 0.86rem;
+    padding: 11px 0;
+  }
+
+  .maroon-login-btn {
+    padding: 11px;
+    font-size: 0.9rem;
+  }
+
+  .flag-headline {
+    font-size: 0.58rem;
+  }
+
+  .flag-subline {
+    font-size: 0.62rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   14. REDUCED MOTION PREFERENCE (ACCESSIBILITY)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .bus-journey-rig,
+  .spinning-wheel-spokes,
+  .flag-cloth-wave,
+  .flag-fabric-shimmer,
+  .headlight-volumetric-beam,
+  .road-neon-streak,
+  .login-glass-card,
+  .mist-cloud {
+    animation: none !important;
+  }
+
+  .bus-journey-rig {
+    transform: translate3d(50vw, 0, 0);
+  }
+}

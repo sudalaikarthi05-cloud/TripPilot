@@ -1,0 +1,106 @@
+.itin-map-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-gray-green-border);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-cream-light);
+}
+
+.itin-leaflet-container {
+  width: 100%;
+  height: 380px;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .itin-leaflet-container {
+    height: 300px;
+  }
+}
+
+/* Custom Marker Pins */
+.itin-custom-pin-wrap {
+  background: transparent;
+  border: none;
+}
+
+.itin-custom-pin {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+  border: 2px solid white;
+  transition: transform 0.2s ease;
+}
+
+.itin-custom-pin:hover {
+  transform: scale(1.15);
+}
+
+/* Map Popups */
+.itin-map-popup {
+  max-width: 240px;
+  font-family: var(--font-body, inherit);
+}
+
+.itin-map-popup-img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  display: block;
+}
+
+.itin-map-popup-body {
+  padding: 0.75rem 0.25rem 0.25rem;
+}
+
+.itin-map-popup-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.itin-map-popup-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #173D32;
+  margin: 0 0 0.35rem 0;
+  line-height: 1.3;
+}
+
+.itin-map-popup-time,
+.itin-map-popup-travel,
+.itin-map-popup-hours,
+.itin-map-popup-addr {
+  font-size: 0.78rem;
+  color: #4A5568;
+  margin: 0.2rem 0;
+  line-height: 1.35;
+}
+
+.itin-map-attribution-note {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  background: rgba(255,255,255,0.9);
+  padding: 0.25rem 0.75rem;
+  text-align: right;
+  border-top: 1px solid var(--color-gray-green-border);
+}
+
+.itin-map-attribution-note a {
+  color: var(--color-forest);
+  text-decoration: underline;
+}
+
