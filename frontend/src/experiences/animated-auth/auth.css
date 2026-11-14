@@ -34,6 +34,14 @@
   z-index: 9999;
 }
 
+/* Accessibility Focus Rings */
+.animated-auth-container button:focus-visible,
+.animated-auth-container input:focus-visible,
+.animated-auth-container a:focus-visible {
+  outline: 2px solid var(--tp-cyan);
+  outline-offset: 2px;
+}
+
 /* ==========================================================================
    2. Cinematic Video Layer & Vignettes
    ========================================================================== */
@@ -46,12 +54,28 @@
   z-index: 1;
 }
 
+.cinematic-poster-fallback {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.cinematic-poster-fallback.loaded {
+  opacity: 0;
+}
+
 .cinematic-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  transition: filter 0.8s ease;
+  transition: filter 0.8s ease, opacity 0.6s ease;
+  z-index: 2;
 }
 
 .cinematic-video.blurred {
@@ -96,20 +120,10 @@
   z-index: 5;
 }
 
-/* Exterior Roof Plate Overlay */
+/* Exterior Roof Plate Overlay - Roof branding is baked directly into the video pixels at native 30fps.
+   We hide .brand-roof-plate to avoid duplicate layering over the video footage. */
 .brand-roof-plate {
-  position: absolute;
-  top: 36%;
-  left: 36%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.35rem 1rem;
-  background: rgba(255, 255, 255, 0.94);
-  border-radius: 4px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none !important;
 }
 
 .brand-roof-plate.stationary {
@@ -163,6 +177,54 @@
 .brand-subtitle {
   font-size: 0.85rem;
   font-weight: 700;
+  color: var(--tp-burgundy-glow);
+  text-transform: uppercase;
+}
+
+/* Side Body Decal (covers old operator lettering on lower coach flank) */
+.brand-side-decal {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.9rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 250, 252, 0.98) 60%, rgba(241, 245, 249, 0.92) 100%);
+  border-radius: 5px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-side-badge-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.side-decal-swoosh {
+  width: 12px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--tp-burgundy-glow), #f59e0b);
+  border-radius: 2px;
+  align-self: center;
+}
+
+.side-decal-title {
+  font-size: 0.95rem;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+  text-transform: uppercase;
+}
+
+.side-decal-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   color: var(--tp-burgundy-glow);
   text-transform: uppercase;
 }
@@ -805,7 +867,8 @@
     display: none;
   }
 
-  .brand-roof-plate {
+  .brand-roof-plate,
+  .brand-side-decal {
     display: none; /* Hide complex motion overlay on small mobile to prevent clipping */
   }
 }

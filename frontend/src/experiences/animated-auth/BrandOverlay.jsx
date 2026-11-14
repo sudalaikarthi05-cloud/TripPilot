@@ -3,7 +3,7 @@ import { VIDEO_CUES, AUTH_STATES } from './animations';
 
 /**
  * BrandOverlay: High-fidelity TripPilot branding compositing layer
- * Replaces the reference bus signage with TripPilot Travels branding,
+ * Replaces reference bus signage and side lettering with TripPilot branding,
  * matching vehicle perspective, motion timing, and interior luxury aesthetics.
  */
 const BrandOverlay = ({ currentTime, authState }) => {
@@ -58,47 +58,67 @@ const BrandOverlay = ({ currentTime, authState }) => {
 
   return (
     <div className="trippilot-brand-overlay-container" aria-hidden="true">
-      {/* 1. Exterior Arrival Roof Plate */}
+      {/* 1. Exterior Arrival: Roofline & Side Decal */}
       {isExteriorArrival && arrivalOpacity > 0 && (
-        <div
-          className="brand-roof-plate"
-          style={{
-            left: `${arrivalX}%`,
-            top: `${arrivalY}%`,
-            opacity: arrivalOpacity,
-            transform: `translate(-50%, -50%) scale(${arrivalScale})`,
-          }}
-        >
-          <div className="brand-badge-wrapper">
-            <svg
-              className="brand-mountain-svg"
-              viewBox="0 0 40 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 20L15 6L23 15L29 9L38 20H4Z"
-                fill="url(#mountainGrad)"
-              />
-              <path
-                d="M12 20L18 12L24 18L30 11L36 20"
-                stroke="#ffffff"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              />
-              <defs>
-                <linearGradient id="mountainGrad" x1="4" y1="20" x2="38" y2="6">
-                  <stop offset="0%" stopColor="#8b1e2b" />
-                  <stop offset="100%" stopColor="#1e293b" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="brand-text-group">
-              <span className="brand-title">TripPilot</span>
-              <span className="brand-subtitle">Travels</span>
+        <>
+          {/* Roof Plate */}
+          <div
+            className="brand-roof-plate"
+            style={{
+              left: `${arrivalX}%`,
+              top: `${arrivalY}%`,
+              opacity: arrivalOpacity,
+              transform: `translate(-50%, -50%) scale(${arrivalScale})`,
+            }}
+          >
+            <div className="brand-badge-wrapper">
+              <svg
+                className="brand-mountain-svg"
+                viewBox="0 0 40 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 20L15 6L23 15L29 9L38 20H4Z"
+                  fill="url(#mountainGrad)"
+                />
+                <path
+                  d="M12 20L18 12L24 18L30 11L36 20"
+                  stroke="#ffffff"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <defs>
+                  <linearGradient id="mountainGrad" x1="4" y1="20" x2="38" y2="6">
+                    <stop offset="0%" stopColor="#8b1e2b" />
+                    <stop offset="100%" stopColor="#1e293b" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div className="brand-text-group">
+                <span className="brand-title">TripPilot</span>
+                <span className="brand-subtitle">Travels</span>
+              </div>
             </div>
           </div>
-        </div>
+
+          {/* Side Body Decal: Covers old operator lettering on the lower side panel */}
+          <div
+            className="brand-side-decal"
+            style={{
+              left: `${arrivalX - 2}%`,
+              top: `${arrivalY + 16}%`,
+              opacity: arrivalOpacity * 0.95,
+              transform: `translate(-50%, -50%) scale(${arrivalScale * 0.9})`,
+            }}
+          >
+            <div className="brand-side-badge-wrapper">
+              <div className="side-decal-swoosh" />
+              <span className="side-decal-title">TripPilot</span>
+              <span className="side-decal-tag">Express</span>
+            </div>
+          </div>
+        </>
       )}
 
       {/* 2. Cabin Interior Ambient Signet */}
@@ -111,41 +131,61 @@ const BrandOverlay = ({ currentTime, authState }) => {
         </div>
       )}
 
-      {/* 3. Exterior Departure Roof Plate */}
+      {/* 3. Exterior Departure: Roofline & Side Decal */}
       {isExteriorDeparture && departOpacity > 0 && (
-        <div
-          className="brand-roof-plate"
-          style={{
-            left: `${departX}%`,
-            top: `${departY}%`,
-            opacity: departOpacity,
-            transform: `translate(-50%, -50%) scale(${departScale})`,
-          }}
-        >
-          <div className="brand-badge-wrapper">
-            <svg
-              className="brand-mountain-svg"
-              viewBox="0 0 40 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 20L15 6L23 15L29 9L38 20H4Z"
-                fill="url(#mountainGradDep)"
-              />
-              <defs>
-                <linearGradient id="mountainGradDep" x1="4" y1="20" x2="38" y2="6">
-                  <stop offset="0%" stopColor="#8b1e2b" />
-                  <stop offset="100%" stopColor="#1e293b" />
-                </linearGradient>
-              </defs>
-            </svg>
-            <div className="brand-text-group">
-              <span className="brand-title">TripPilot</span>
-              <span className="brand-subtitle">Travels</span>
+        <>
+          {/* Departure Roof Plate */}
+          <div
+            className="brand-roof-plate"
+            style={{
+              left: `${departX}%`,
+              top: `${departY}%`,
+              opacity: departOpacity,
+              transform: `translate(-50%, -50%) scale(${departScale})`,
+            }}
+          >
+            <div className="brand-badge-wrapper">
+              <svg
+                className="brand-mountain-svg"
+                viewBox="0 0 40 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 20L15 6L23 15L29 9L38 20H4Z"
+                  fill="url(#mountainGradDep)"
+                />
+                <defs>
+                  <linearGradient id="mountainGradDep" x1="4" y1="20" x2="38" y2="6">
+                    <stop offset="0%" stopColor="#8b1e2b" />
+                    <stop offset="100%" stopColor="#1e293b" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div className="brand-text-group">
+                <span className="brand-title">TripPilot</span>
+                <span className="brand-subtitle">Travels</span>
+              </div>
             </div>
           </div>
-        </div>
+
+          {/* Departure Side Body Decal */}
+          <div
+            className="brand-side-decal"
+            style={{
+              left: `${departX - 2}%`,
+              top: `${departY + 16}%`,
+              opacity: departOpacity * 0.95,
+              transform: `translate(-50%, -50%) scale(${departScale * 0.9})`,
+            }}
+          >
+            <div className="brand-side-badge-wrapper">
+              <div className="side-decal-swoosh" />
+              <span className="side-decal-title">TripPilot</span>
+              <span className="side-decal-tag">Express</span>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );

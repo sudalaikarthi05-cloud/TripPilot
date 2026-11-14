@@ -18,6 +18,12 @@ frontend/node_modules/
 frontend/dist/
 .pnpm-debug.log*
 
+# Media / Large 4K assets (do not commit 4K file to git)
+frontend/public/videos/cinematic-bus.mp4
+frontend/public/videos/cinematic-bus-original-backup.mp4
+frontend/scratch_frames/
+*.4k.mp4
+
 # IDE / System
 .idea/
 *.iml

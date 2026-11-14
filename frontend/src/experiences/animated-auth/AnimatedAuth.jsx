@@ -36,6 +36,22 @@ const AnimatedAuth = () => {
   const hasPausedAtAuthRef = useRef(false);
   const authenticatedNameRef = useRef('');
 
+  // Support prefers-reduced-motion: skip video intro directly to passenger window auth
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (mediaQuery.matches) {
+        hasPausedAtAuthRef.current = true;
+        setAuthState(AUTH_STATES.AUTH_READY);
+        setCurrentTime(VIDEO_CUES.AUTH_PAUSE_TIME);
+        if (videoPlayerRef.current) {
+          videoPlayerRef.current.seek(VIDEO_CUES.AUTH_PAUSE_TIME);
+          videoPlayerRef.current.pause();
+        }
+      }
+    }
+  }, []);
+
   // If user is already authenticated when opening /login, proceed directly to main site
   useEffect(() => {
     if (isAuthenticated && authState === AUTH_STATES.INTRO && !authLoading) {
@@ -150,7 +166,6 @@ const AnimatedAuth = () => {
       {/* 1. Cinematic Background Video Engine */}
       <VideoPlayer
         ref={videoPlayerRef}
-        src="/videos/cinematic-bus.mp4"
         onTimeUpdate={handleTimeUpdate}
         onEnded={handleVideoEnded}
         isMuted={isMuted}

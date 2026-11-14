@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [journeyPlaying, setJourneyPlaying] = useState(false);
 
-  // Restore authenticated session on mount
+  // Restore authenticated session on mount by checking with backend
   useEffect(() => {
     let isMounted = true;
 
@@ -36,24 +36,6 @@ export const AuthProvider = ({ children }) => {
           setToken(savedToken);
         }
       } catch (err) {
-        // If network error (backend offline locally), keep existing stored user rather than logging out
-        const isNetworkErr = !err.response && (err.code === 'ERR_NETWORK' || err.message?.includes('Network Error'));
-        if (isNetworkErr) {
-          const rawUser = localStorage.getItem('trippilot_user') || sessionStorage.getItem('trippilot_user');
-          if (rawUser) {
-            try {
-              if (isMounted) {
-                setUser(JSON.parse(rawUser));
-                setToken(savedToken);
-              }
-              return;
-            } catch {
-              // Ignore JSON parse error
-            }
-          }
-        }
-
-        // Token expired or invalid
         console.warn('Session verification failed, logging out:', err.message);
         localStorage.removeItem('trippilot_token');
         localStorage.removeItem('trippilot_user');
@@ -75,11 +57,32 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async ({ email, password, rememberMe = false }) => {
+    // Optional dev-only mock behind explicit env flag (OFF by default)
+    if (import.meta.env.VITE_USE_MOCK_AUTH === 'true') {
+      if (password === 'wrongpassword') {
+        throw new Error('Invalid email or password.');
+      }
+      const mockUser = { id: 'mock-user-1', name: email.split('@')[0] || 'Traveler', email };
+      const mockToken = 'mock-jwt-token-dev-only';
+      if (rememberMe) {
+        localStorage.setItem('trippilot_token', mockToken);
+        localStorage.setItem('trippilot_user', JSON.stringify(mockUser));
+      } else {
+        sessionStorage.setItem('trippilot_token', mockToken);
+        sessionStorage.setItem('trippilot_user', JSON.stringify(mockUser));
+      }
+      setJourneyPlaying(true);
+      setToken(mockToken);
+      setUser(mockUser);
+      return { token: mockToken, user: mockUser };
+    }
+
+    // Real backend authentication (/api/auth/login)
     try {
       const res = await loginUser({ email, password, rememberMe });
       const { token: receivedToken, user: receivedUser } = res.data;
 
-      // Clear any previous token
+      // Clear any prior tokens
       localStorage.removeItem('trippilot_token');
       localStorage.removeItem('trippilot_user');
       sessionStorage.removeItem('trippilot_token');
@@ -98,48 +101,36 @@ export const AuthProvider = ({ children }) => {
       setUser(receivedUser);
       return res.data;
     } catch (err) {
-      // If backend is offline / unreachable, provide local fallback session so animation testing works seamlessly
-      const isNetworkErr =
-        !err.response &&
-        (err.code === 'ERR_NETWORK' ||
-          err.code === 'ECONNREFUSED' ||
-          err.message?.includes('Network Error') ||
-          err.message?.toLowerCase().includes('network') ||
-          err.message?.toLowerCase().includes('connection') ||
-          err.message?.toLowerCase().includes('failed to fetch'));
-      if (isNetworkErr) {
-        console.warn('Backend unavailable, activating local session fallback:', err.message);
-        const fallbackUser = {
-          id: 'demo-user-1',
-          name: email.split('@')[0] || 'Traveler',
-          email: email.trim(),
-        };
-        const fallbackToken = 'trippilot-offline-demo-token';
-
-        localStorage.removeItem('trippilot_token');
-        localStorage.removeItem('trippilot_user');
-        sessionStorage.removeItem('trippilot_token');
-        sessionStorage.removeItem('trippilot_user');
-
-        if (rememberMe) {
-          localStorage.setItem('trippilot_token', fallbackToken);
-          localStorage.setItem('trippilot_user', JSON.stringify(fallbackUser));
-        } else {
-          sessionStorage.setItem('trippilot_token', fallbackToken);
-          sessionStorage.setItem('trippilot_user', JSON.stringify(fallbackUser));
-        }
-
-        setJourneyPlaying(true);
-        setToken(fallbackToken);
-        setUser(fallbackUser);
-        return { token: fallbackToken, user: fallbackUser };
-      }
       setJourneyPlaying(false);
-      throw err;
+      // Clean up any stale state
+      setUser(null);
+      setToken(null);
+      const message =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        (err.code === 'ERR_NETWORK' || !err.response
+          ? 'Unable to connect to TripPilot authentication server. Please ensure the backend is running.'
+          : err.message || 'Invalid credentials. Please try again.');
+      const customErr = new Error(message);
+      customErr.response = err.response;
+      throw customErr;
     }
   };
 
   const register = async ({ name, email, password }) => {
+    // Optional dev-only mock behind explicit env flag (OFF by default)
+    if (import.meta.env.VITE_USE_MOCK_AUTH === 'true') {
+      const mockUser = { id: 'mock-user-new', name, email };
+      const mockToken = 'mock-jwt-token-dev-only';
+      localStorage.setItem('trippilot_token', mockToken);
+      localStorage.setItem('trippilot_user', JSON.stringify(mockUser));
+      setJourneyPlaying(true);
+      setToken(mockToken);
+      setUser(mockUser);
+      return { token: mockToken, user: mockUser };
+    }
+
+    // Real backend registration (/api/auth/register)
     try {
       const res = await registerUser({ name, email, password });
       const { token: receivedToken, user: receivedUser } = res.data;
@@ -152,34 +143,18 @@ export const AuthProvider = ({ children }) => {
       setUser(receivedUser);
       return res.data;
     } catch (err) {
-      // If backend is offline / unreachable, provide local fallback session
-      const isNetworkErr =
-        !err.response &&
-        (err.code === 'ERR_NETWORK' ||
-          err.code === 'ECONNREFUSED' ||
-          err.message?.includes('Network Error') ||
-          err.message?.toLowerCase().includes('network') ||
-          err.message?.toLowerCase().includes('connection') ||
-          err.message?.toLowerCase().includes('failed to fetch'));
-      if (isNetworkErr) {
-        console.warn('Backend unavailable, activating local session fallback:', err.message);
-        const fallbackUser = {
-          id: 'demo-user-new',
-          name: name.trim(),
-          email: email.trim(),
-        };
-        const fallbackToken = 'trippilot-offline-demo-token';
-
-        localStorage.setItem('trippilot_token', fallbackToken);
-        localStorage.setItem('trippilot_user', JSON.stringify(fallbackUser));
-
-        setJourneyPlaying(true);
-        setToken(fallbackToken);
-        setUser(fallbackUser);
-        return { token: fallbackToken, user: fallbackUser };
-      }
       setJourneyPlaying(false);
-      throw err;
+      setUser(null);
+      setToken(null);
+      const message =
+        err.response?.data?.message ||
+        err.response?.data?.error ||
+        (err.code === 'ERR_NETWORK' || !err.response
+          ? 'Unable to connect to TripPilot registration server. Please ensure the backend is running.'
+          : err.message || 'Registration failed. Please try again.');
+      const customErr = new Error(message);
+      customErr.response = err.response;
+      throw customErr;
     }
   };
 
@@ -223,4 +198,3 @@ export const useAuth = () => {
   }
   return context;
 };
-
